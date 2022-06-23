@@ -8,7 +8,7 @@ int width, height;
 Paddle::void Paddle(
     int velocity_y, 
     int pos_x, int pos_y, 
-    int height, int width
+    int height, int width,
     SDL_Renderer* renderer,
     SDL_Rect* rect
     )
@@ -24,6 +24,14 @@ Paddle::void Paddle(
 }
 
 //-- Methods
+Paddle::void render(
+    this.renderer, 
+    this.rect
+    )
+{
+    SDL_RenderDrawRect(renderer, rect);
+}
+
 Paddle::void move(int x, int y)
 {
     printf("MOVED!");

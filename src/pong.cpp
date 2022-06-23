@@ -59,6 +59,16 @@ int main(int argc, char* argsv[])
                 //-- Render middle line
                 SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
                 SDL_RenderDrawLine(renderer, 400, 0, 400, 800);
+                //-- Render left paddle
+                SDL_Rect* paddle;
+                Paddle LeftPaddle(
+                    0, 
+                    paddle.x, paddle.y, 
+                    paddle.h, paddle.w, 
+                    renderer, 
+                    paddle
+                    );
+                LeftPaddle.render(rednerer, paddle);
                 SDL_RenderPresent(renderer);
             };
         };
