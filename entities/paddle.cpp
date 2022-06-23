@@ -12,6 +12,7 @@ Paddle::void Paddle(int velocity_y, int pos_x, int pos_y)
     this-> pos_y = pos_y;
 }
 
+//-- Methods
 Paddle::void move(int x, int y)
 {
     printf("MOVED!");
