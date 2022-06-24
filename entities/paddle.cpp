@@ -1,6 +1,6 @@
 #include "./headers/paddle.h"
 
-int velocity _y 
+int velocity_y;
 int pos_x, pos_y;
 int width, height;
 
@@ -24,12 +24,13 @@ Paddle::void Paddle(
 }
 
 //-- Methods
-Paddle::void render(
-    this.renderer, 
-    this.rect
-    )
+Paddle::void render()
 {
-    SDL_RenderDrawRect(renderer, rect);
+    this.rect -> x = pos_x;
+    this.rect -> y = pos_y;
+    this.rect -> h = height;
+    this.rect -> w = width;
+    SDL_RenderDrawRect(this.renderer, this.rect);
 }
 
 Paddle::void move(int x, int y)
