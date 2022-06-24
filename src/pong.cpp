@@ -37,7 +37,7 @@ int main(int argc, char* argsv[])
         }
         else
         {
-            //           RENDERER INIT             -->
+            //-- RENDERER INIT            
             renderer = SDL_CreateRenderer(main_window, -1, SDL_RENDERER_ACCELERATED);
             //-- Game Loop
             bool GameIsRunning = true;
@@ -56,19 +56,33 @@ int main(int argc, char* argsv[])
                 //-- Renderer 
                 SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
                 SDL_RenderClear(renderer);
+
                 //-- Render middle line
                 SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
                 SDL_RenderDrawLine(renderer, 400, 0, 400, 800);
-                //-- Render left paddle
-                SDL_Rect* paddle;
+
+                //-- Instance left paddle
+                SDL_Rect* left_paddle;
                 Paddle LeftPaddle(
                     0, 
-                    paddle.x, paddle.y, 
-                    paddle.h, paddle.w, 
+                    20, 100, 
+                    100, 50, 
                     renderer, 
-                    paddle
+                    left_paddle
                     );
-                LeftPaddle.render(rednerer, paddle);
+                LeftPaddle.render();
+                
+                //-- Instance right paddle
+                SDL_Rect* right_paddle;
+                Paddle RightPaddle(
+                    0,
+                    100, 100,
+                    100, 50,
+                    renderer, 
+                    right_paddle
+                );
+                RightPaddle.render();
+                
                 SDL_RenderPresent(renderer);
             };
         };
@@ -78,4 +92,4 @@ int main(int argc, char* argsv[])
     SDL_Quit();
     return 0;
 };
-//---------------------------------------------------------------//
+//-----------------------------------------------------------------//
