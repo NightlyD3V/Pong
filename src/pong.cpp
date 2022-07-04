@@ -69,7 +69,7 @@ int main(int argc, char* argsv[])
                     100, 50, 
                     renderer, 
                     left_paddle
-                    );
+                );
                 LeftPaddle.render();
                 
                 //-- Instance right paddle
