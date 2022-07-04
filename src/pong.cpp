@@ -2,6 +2,7 @@
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_events.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 //-- Custom header imports -->
 #include "../entities/headers/paddle.h"
@@ -15,7 +16,8 @@ int main(int argc, char* argsv[])
     SDL_Surface* screen = NULL;
     SDL_Renderer* renderer = NULL;
 
-    //-- Init SDL and * subsystems                    
+    //-- Init SDL and * subsystems
+    TTF_Init();                   
     if( SDL_Init(SDL_INIT_EVERYTHING != 0) ) 
     {
         printf("SDL failed to initialize: %s\n", SDL_GetError() );
@@ -37,8 +39,16 @@ int main(int argc, char* argsv[])
         }
         else
         {
-            //-- RENDERER INIT            
+            //-- Render Init          
             renderer = SDL_CreateRenderer(main_window, -1, SDL_RENDERER_ACCELERATED);
+            //-- Text
+            TTF_Font* font = TTF_OpenFont("noto.ttf", 24);
+            SDL_Surface* textSurf = TTF_RenderText_Solid( font, "PONG0", {255,255,255});
+            SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurf);
+            SDL_Rect textRect = {30, 30, textSurf->w, textSurf->h};
+            SDL_FreeSurface(textSurf);
+            TTF_CloseFont(font);
+
             //-- Game Loop
             bool GameIsRunning = true;
             while( GameIsRunning )
@@ -62,33 +72,35 @@ int main(int argc, char* argsv[])
                 SDL_RenderDrawLine(renderer, 400, 0, 400, 800);
 
                 //-- Instance left paddle
-                SDL_Rect* left_paddle;
-                Paddle LeftPaddle(
-                    0, 
-                    20, 100, 
-                    100, 50, 
-                    renderer, 
-                    left_paddle
-                );
-                LeftPaddle.render();
+                // SDL_Rect* left_paddle;
+                // Paddle LeftPaddle(
+                //     0, 
+                //     20, 100, 
+                //     100, 50, 
+                //     renderer, 
+                //     left_paddle
+                // );
+
+                // LeftPaddle.render();
                 
-                //-- Instance right paddle
-                SDL_Rect* right_paddle;
-                Paddle RightPaddle(
-                    0,
-                    100, 100,
-                    100, 50,
-                    renderer, 
-                    right_paddle
-                );
-                RightPaddle.render();
-                
+                // -- Instance right paddle
+                // SDL_Rect* right_paddle;
+                // Paddle RightPaddle(
+                //     0,
+                //     100, 100,
+                //     100, 50,
+                //     renderer, 
+                //     right_paddle
+                // );
+                // RightPaddle.render();
+                SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
                 SDL_RenderPresent(renderer);
             };
         };
     };
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(main_window);
+    TTF_Quit();
     SDL_Quit();
     return 0;
 };
