@@ -4,9 +4,10 @@
 class Ball
 {
     public: 
-        int velocity;
-        int pos_x, pos_y;
-        SDL_Renderer* renderer;
+        int set_velocity;
+        int set_pos_x, set_pos_y;
+        int set_height, set_width;
+        SDL_Renderer* set_renderer;
 }
 
 #endif

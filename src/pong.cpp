@@ -43,7 +43,7 @@ int main(int argc, char* argsv[])
             renderer = SDL_CreateRenderer(main_window, -1, SDL_RENDERER_ACCELERATED);
             //-- Text
             TTF_Font* font = TTF_OpenFont("noto.ttf", 24);
-            SDL_Surface* textSurf = TTF_RenderText_Solid( font, "PONG0", {255,255,255});
+            SDL_Surface* textSurf = TTF_RenderText_Solid(font, "PONG0", {255,255,255});
             SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurf);
             SDL_Rect textRect = {30, 30, textSurf->w, textSurf->h};
             SDL_FreeSurface(textSurf);

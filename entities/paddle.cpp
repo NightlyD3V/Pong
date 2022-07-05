@@ -1,39 +1,36 @@
+#include <SDL2/SDL.h>
 #include "./headers/paddle.h"
 
-int velocity_y;
-int pos_x, pos_y;
-int width, height;
 
 //-- Constructor
-Paddle::void Paddle(
+Paddle::Paddle(
     int velocity_y, 
     int pos_x, int pos_y, 
     int height, int width,
     SDL_Renderer* renderer,
     SDL_Rect* rect
-    )
+) : set_velocity_y(velocity_y),
+    set_pos_x(pos_x),
+    set_pos_y(pos_y), 
+    set_height(height), 
+    set_width(width), 
+    set_renderer(renderer), 
+    set_rect(rect)
 {
     printf("Paddle is being created!");
-    this-> velocity_y = velocity_y;
-    this-> pos_x = pos_x;
-    this-> pos_y = pos_y;
-    this-> height = height;
-    this-> width = width;
-    this-> renderer = renderer;
-    this-> rect = rect;
 }
 
 //-- Methods
-Paddle::void render()
+void Paddle::render()
 {
-    this.rect -> x = pos_x;
-    this.rect -> y = pos_y;
-    this.rect -> h = height;
-    this.rect -> w = width;
-    SDL_RenderDrawRect(this.renderer, this.rect);
+    this->set_rect->x = this-> set_pos_x;
+    this->set_rect->y = this-> set_pos_y;
+    this->set_rect->h = this-> set_height;
+    this->set_rect->w = this-> set_width;
+    SDL_RenderDrawRect(this->set_renderer, this->set_rect);
 }
 
-Paddle::void move(int x, int y)
+void Paddle::move(int x, int y)
 {
     printf("MOVED!");
 }
