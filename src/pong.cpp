@@ -42,59 +42,65 @@ int main(int argc, char* argsv[])
             //-- Render Init          
             renderer = SDL_CreateRenderer(main_window, -1, SDL_RENDERER_ACCELERATED);
             //-- Text
-            TTF_Font* font = TTF_OpenFont("noto.ttf", 24);
-            SDL_Surface* textSurf = TTF_RenderText_Solid(font, "PONG0", {255,255,255});
-            SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurf);
-            SDL_Rect textRect = {30, 30, textSurf->w, textSurf->h};
-            SDL_FreeSurface(textSurf);
-            TTF_CloseFont(font);
-
-            //-- Game Loop
-            bool GameIsRunning = true;
-            while( GameIsRunning )
+            if(TTF_Init() == -1) 
             {
-                //-- Event loop
-                SDL_Event event;
-                while ( SDL_PollEvent( &event ) )
+                printf("TTF_Init: %s\n", TTF_GetError());
+            } 
+            else 
+            {
+                TTF_Font* font = TTF_OpenFont("../assets/fonst/Free Port Go Away.ttf", 24);
+                SDL_Surface* textSurf = TTF_RenderText_Solid(font, "PONG0", {255,255,255});
+                SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurf);
+                SDL_Rect textRect = {30, 30, textSurf->w, textSurf->h};
+                SDL_FreeSurface(textSurf);
+                TTF_CloseFont(font);
+                //-- Game Loop
+                bool GameIsRunning = true;
+                while( GameIsRunning )
                 {
-                    if( event.type == SDL_QUIT )
+                    //-- Event loop
+                    SDL_Event event;
+                    while ( SDL_PollEvent( &event ) )
                     {
-                        GameIsRunning = false;
+                        if( event.type == SDL_QUIT )
+                        {
+                            GameIsRunning = false;
+                        }
                     }
-                }
 
-                //-- Renderer 
-                SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-                SDL_RenderClear(renderer);
+                    //-- Renderer 
+                    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+                    SDL_RenderClear(renderer);
 
-                //-- Render middle line
-                SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-                SDL_RenderDrawLine(renderer, 400, 0, 400, 800);
+                    //-- Render middle line
+                    SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+                    SDL_RenderDrawLine(renderer, 400, 0, 400, 800);
 
-                //-- Instance left paddle
-                // SDL_Rect* left_paddle;
-                // Paddle LeftPaddle(
-                //     0, 
-                //     20, 100, 
-                //     100, 50, 
-                //     renderer, 
-                //     left_paddle
-                // );
+                    //-- Instance left paddle
+                    // SDL_Rect* left_paddle;
+                    // Paddle LeftPaddle(
+                    //     0, 
+                    //     20, 100, 
+                    //     100, 50, 
+                    //     renderer, 
+                    //     left_paddle
+                    // );
 
-                // LeftPaddle.render();
-                
-                // -- Instance right paddle
-                // SDL_Rect* right_paddle;
-                // Paddle RightPaddle(
-                //     0,
-                //     100, 100,
-                //     100, 50,
-                //     renderer, 
-                //     right_paddle
-                // );
-                // RightPaddle.render();
-                SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
-                SDL_RenderPresent(renderer);
+                    // LeftPaddle.render();
+                    
+                    // -- Instance right paddle
+                    // SDL_Rect* right_paddle;
+                    // Paddle RightPaddle(
+                    //     0,
+                    //     100, 100,
+                    //     100, 50,
+                    //     renderer, 
+                    //     right_paddle
+                    // );
+                    // RightPaddle.render();
+                    SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+                    SDL_RenderPresent(renderer);
+                };
             };
         };
     };
